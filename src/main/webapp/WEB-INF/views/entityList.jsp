@@ -10,7 +10,7 @@
 		<div class="container">
 			<h2>Entities</h2>
 			<datatables:table id="entities" data="${entities}" row="entity" 
-				cssClass="table table-striped" theme="bootstrap2" info="false" pageable="false">
+				cssClass="table table-striped" theme="bootstrap2" info="false">
 				<datatables:column title="ID" property="id" cssStyle="width: 350px;"/>
 				<datatables:column title="Name" property="name" cssStyle="width: 350px;"/>
 			</datatables:table>
