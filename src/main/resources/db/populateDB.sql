@@ -1,0 +1,1 @@
+INSERT IGNORE INTO entity (name) VALUES ('Test');
