@@ -1,10 +1,5 @@
 package ru.cdek.example.repository.jdbc;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +9,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-
 import ru.cdek.example.model.Entity;
 import ru.cdek.example.repository.EntityRepository;
+
+import javax.sql.DataSource;
+import java.util.Collection;
 
 @Repository
 public class JdbcEntityRepositoryImpl implements EntityRepository {
@@ -38,15 +35,14 @@ public class JdbcEntityRepositoryImpl implements EntityRepository {
 	}
 
 	public Collection<Entity> findAll() throws DataAccessException {
-		List<Entity> entities = this.jdbcTemplate.query(SQL_ENTITIES,
+		return this.jdbcTemplate.query(SQL_ENTITIES,
 				BeanPropertyRowMapper.newInstance(Entity.class));
-		return entities;
 	}
 
 	public void save(Entity entity) throws DataAccessException {
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(entity);
 		Number id = this.insertEntity.executeAndReturnKey(paramSource);
-		logger.info(String.format("Added entity with id - %d (name: %s)", id, entity.getName()));
+		logger.info(String.format("Added entity with id - %d (name: %s)", id.intValue(), entity.getName()));
 	}
 
 }

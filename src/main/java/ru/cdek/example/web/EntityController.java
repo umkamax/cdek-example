@@ -1,9 +1,5 @@
 package ru.cdek.example.web;
 
-import java.util.Map;
-
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +10,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
-
 import ru.cdek.example.model.Entity;
 import ru.cdek.example.service.EntityService;
+
+import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 public class EntityController {
@@ -34,7 +32,7 @@ public class EntityController {
 	@RequestMapping(value = "/entities", method = RequestMethod.GET) 
 	public String showEntityList(Map<String, Object> model) {
 		model.put("entities", entityService.findEntities());
-		return "/entityList";
+		return "entityList";
 	}
 	
 	@RequestMapping(value = "/entity/create", method = RequestMethod.GET)
